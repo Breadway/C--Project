@@ -12,6 +12,7 @@ local validTypes = {
 	"String"
 }
 
+local Services = {}
 local Stringvars = {}
 local Intvars = {}
 local Vector3vars = {}
@@ -116,6 +117,13 @@ function Sew.CreateVar(argstable)
 		table.insert(Stringvars, Int)
 	end
 	return Int.Value
+end
+
+function Sew.CreateService(argstable)
+	local ServicesFolder = game.ReplicatedStorage.Sew.Services
+	local Service = Instance.new("RemoteFunction")
+	Service.Parent = ServicesFolder
+	table.insert(Services, Service)
 end
 
 return Sew
