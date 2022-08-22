@@ -27,12 +27,12 @@ local Boolvars = {}
 local Allvars = {}
 
 function Sew.GetVar(Var)
-	local var = AllVars[Var]
+	local var = Allvars[Var]
 	return var
 end
 
-function Sew.GetAllControllers()
-	return Controllers
+function Sew:GetController(Name)
+	return Controllers[Name]
 end
 
 function Sew.GetAllServices()
@@ -83,9 +83,9 @@ function Sew.Stringvars()
 	return Stringvars
 end
 
-function Sew.CreateVar(argstable)
+function Sew:Createvar(argstable)
 	local valid = table.find(validTypes, argstable["Type"])
-	if script.DebugMode.Value then
+	if script.Parent.DebugMode.Value then
 		print(argstable)
 	end
 	--[[if argstable["Type"] ~= "Bool" then valid = false elseif argstable["Type"] == "Bool" then valid = true end
@@ -130,7 +130,7 @@ function Sew.CreateVar(argstable)
 	elseif Var.ClassName == "StringValue" then
 		table.insert(Stringvars, Var)
 	end
-	return Int
+	return Var
 end
 
 function Sew.CreateService(argstable)
@@ -147,22 +147,17 @@ end
 
 function Sew.CreateController(argstable)
 	local Controller = Instance.new("RemoteFunction")
-	local args1, Invoke = nil or argstable["Invoke"]
+	local Invoke = nil or argstable["Invoke"]
 	Controller.Name = argstable["Name"]
 	table.insert(Controllers, Controller)
-	table.insert(Services[argstable["ParentService"]], Controller)
-	Controller.OnServerInvoke:Connect(function(args)
+	Controller.OnClientInvoke  = function(args)
 		pcall(function(args)
-			args1 = args
-			pcall(Invoke, args1)
+			pcall(Invoke, args)
 		end)
-	end)
+	end
 	return Controller
 end
 
-function Sew.GetController(Name, ParentService)
-	local Controller = Services[ParentService][Name]
-	return Controller
-end
+
 
 return Sew
