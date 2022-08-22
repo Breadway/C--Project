@@ -1,4 +1,5 @@
 local Sew = {}
+local ServicesFolder = game.ReplicatedStorage.Sew.Services
 local validTypes = {
 	"Bool",
 	"BrickColor",
@@ -13,6 +14,7 @@ local validTypes = {
 }
 
 local Services = {}
+local Controllers = {}
 local Stringvars = {}
 local Intvars = {}
 local Vector3vars = {}
@@ -120,7 +122,6 @@ function Sew.CreateVar(argstable)
 end
 
 function Sew.CreateService(argstable)
-	local ServicesFolder = game.ReplicatedStorage.Sew.Services
 	local Service = Instance.new("Folder")
 	Service.Parent = ServicesFolder
 	Service.Name = argstable["Name"]
@@ -132,6 +133,17 @@ function Sew.GetService(Name)
 	return service
 end
 
-function 
+function Sew.CreateController(Name, ParentService)
+	local Controller = Instance.new("RemoteFunction")
+	Controller.Parent = ServicesFolder[ParentService]
+	Controller.Name = Name
+	table.insert(Controllers, Controller)
+	return Controller
+end
+
+function Sew.GetController(Name, ParentService)
+	local Controller = ServicesFolder[ParentService][Name]
+	return Controller
+end
 
 return Sew
