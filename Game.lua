@@ -1,4 +1,4 @@
-local Sew = game.ReplicatedStorage[script.Parent.player.Value].Values or {}
+local Sew = {}
 local validTypes = {
 	"Bool",
 	"BrickColor",
@@ -11,44 +11,56 @@ local validTypes = {
 	"Int",
 	"String"
 }
+
+local Stringvars = {}
+local Intvars = {}
+local Vector3vars = {}
+local Rayvars = {}
+local Numbervars = {}
+local Objectvars = {}
+local Color3vars = {}
+local CFramevars = {}
+local Brickvars = {}
+local Boolvars = {}
+
 function Sew.Intvars()
-	return var.Int
+	return Intvars
 end
 
 function Sew.Boolvars()
-	return var.Bool
+	return Boolvars
 end
 
 function Sew.Brickvars()
-	return var.BrickColor
+	return Brickvars
 end
 
 function Sew.CFramevars()
-	return var.CFrame
+	return CFramevars
 end
 
 function Sew.Colorvars()
-	return var.Color3
+	return Color3vars
 end
 
 function Sew.Objectvars()
-	return var.Object
+	return Objectvars
 end
 
 function Sew.Numbervars()
-	return var.Number
+	return Numbervars
 end
 
 function Sew.Rayvars()
-	return var.Ray
+	return Rayvars
 end
 
 function Sew.Vector3vars()
-	return var.Vector3
+	return Vector3vars
 end
 
 function Sew.Stringvars()
-	return var.String
+	return Stringvars
 end
 
 function Sew.new(argstable)
@@ -73,10 +85,30 @@ function Sew.new(argstable)
 	end
 
 	local Int = Instance.new(argstable["Type"].. "Value")
-	Int.Parent = var[argstable["Type"]]
 	Int.Name = argstable["Name"]
 	Int.Value = argstable["Value"]
 	print("Successfully Made ".. argstable["Name"] .. " Value Of Type: " .. argstable["Type"])
+	if Int.ClassName == "BoolValue" then
+		table.insert(Boolvars, Int)
+	elseif Int.ClassName == "IntValue" then
+		table.insert(Intvars, Int)
+	elseif Int.ClassName == "BrickColorValue" then
+		table.insert(Brickvars, Int)
+	elseif Int.ClassName == "CFrameValue" then
+		table.insert(CFramevars, Int)
+	elseif Int.ClassName == "Color3Value" then
+		table.insert(Color3vars, Int)
+	elseif Int.ClassName == "ObjectValue" then
+		table.insert(Objectvars, Int)
+	elseif Int.ClassName == "NumberValue" then
+		table.insert(Numbervars, Int)
+	elseif Int.ClassName == "RayValue" then
+		table.insert(Numbervars, Int)
+	elseif Int.ClassName == "Vector3Value" then
+		table.insert(Vector3vars, Int)
+	elseif Int.ClassName == "StringValue" then
+		table.insert(Stringvars, Int)
+	end
 	return Int.Value
 end
 
