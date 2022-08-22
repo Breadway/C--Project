@@ -1,5 +1,4 @@
-local var = game.ReplicatedStorage[script.Parent.player.Value].Values
-local varnew = {}
+local Sew = game.ReplicatedStorage[script.Parent.player.Value].Values or {}
 local validTypes = {
 	"Bool",
 	"BrickColor",
@@ -12,47 +11,47 @@ local validTypes = {
 	"Int",
 	"String"
 }
-function varnew.Intvars()
+function Sew.Intvars()
 	return var.Int
 end
 
-function varnew.Boolvars()
+function Sew.Boolvars()
 	return var.Bool
 end
 
-function varnew.Brickvars()
+function Sew.Brickvars()
 	return var.BrickColor
 end
 
-function varnew.CFramevars()
+function Sew.CFramevars()
 	return var.CFrame
 end
 
-function varnew.Colorvars()
+function Sew.Colorvars()
 	return var.Color3
 end
 
-function varnew.Objectvars()
+function Sew.Objectvars()
 	return var.Object
 end
 
-function varnew.Numbervars()
+function Sew.Numbervars()
 	return var.Number
 end
 
-function varnew.Rayvars()
+function Sew.Rayvars()
 	return var.Ray
 end
 
-function varnew.Vector3vars()
+function Sew.Vector3vars()
 	return var.Vector3
 end
 
-function varnew.Stringvars()
+function Sew.Stringvars()
 	return var.String
 end
 
-function varnew.new(argstable)
+function Sew.new(argstable)
 	local valid = table.find(validTypes, argstable["Type"])
 	if script.DebugMode.Value then
 		print(argstable)
@@ -78,6 +77,7 @@ function varnew.new(argstable)
 	Int.Name = argstable["Name"]
 	Int.Value = argstable["Value"]
 	print("Successfully Made ".. argstable["Name"] .. " Value Of Type: " .. argstable["Type"])
+	return Int.Value
 end
 
 return varnew
