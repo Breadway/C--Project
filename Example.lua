@@ -1,4 +1,4 @@
-local Sew = loadstring(game.ReplicatedStorage.Packages.Sew)
+local Sew = loadstring(game.ReplicatedStorage.Packages.Sew) or game.ReplicatedStorage.Packages.Sew
 local Vars = Sew.Intvars() or Sew.Boolvars() or Sew.Brickvars() or Sew.CFramevars() or Sew.Colorvars() or Sew.Objectvars() or Sew.Numbervars() or Sew.Rayvars() or Sew.Vector3vars() or Sew.Stringvars()
 local getVars = Sew.GetVars()
 
@@ -8,4 +8,10 @@ Sew.CreateVar({
 	["Value"] = true
 })
 
-print(GetVars.Bool.Value)
+Sew.CreateService({["Name"] = "SwordService"})
+
+Sew.CreateController("SwordController", SwordService)
+
+Sew.GetController("SwordController")
+
+print(getVars.Bool.Value)
