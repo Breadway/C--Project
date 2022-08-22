@@ -1,5 +1,4 @@
 local Sew = {}
-local ServicesFolder = game.ReplicatedStorage.Packages.Sew.Services
 local validTypes = {
 	"Bool",
 	"BrickColor",
