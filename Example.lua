@@ -4,7 +4,7 @@ local getVars = Sew.GetVars()
 local getAllServices = Sew.GetAllServices()
 local getAllControllers = Sew.GetAllControllers
 
-local Bool Sew.CreateVar({
+local Bool = Sew.CreateVar({
 	["Type"] = "Bool",
 	["Name"] = "Bool",
 	["Value"] = true
