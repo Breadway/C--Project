@@ -126,7 +126,7 @@ function Sew.CreateVar(argstable)
 	elseif Int.ClassName == "StringValue" then
 		table.insert(Stringvars, Int)
 	end
-	return Int.Value
+	return Int
 end
 
 function Sew.CreateService(argstable)
