@@ -22,6 +22,11 @@ local Color3vars = {}
 local CFramevars = {}
 local Brickvars = {}
 local Boolvars = {}
+local Allvars = {}
+
+function Sew.GetVars()
+	return Allvars
+end
 
 function Sew.Intvars()
 	return Intvars
@@ -88,6 +93,7 @@ function Sew.new(argstable)
 	Int.Name = argstable["Name"]
 	Int.Value = argstable["Value"]
 	print("Successfully Made ".. argstable["Name"] .. " Value Of Type: " .. argstable["Type"])
+	table.insert(Allvars, Int)
 	if Int.ClassName == "BoolValue" then
 		table.insert(Boolvars, Int)
 	elseif Int.ClassName == "IntValue" then
@@ -112,4 +118,4 @@ function Sew.new(argstable)
 	return Int.Value
 end
 
-return varnew
+return Sew
