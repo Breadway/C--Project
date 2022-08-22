@@ -133,13 +133,13 @@ function Sew.GetService(Name)
 	return service
 end
 
-function Sew.CreateController(Name, ParentService, Invoke)
+function Sew.CreateController(argstable)
 	local Controller = Instance.new("RemoteFunction")
-	Controller.Parent = ServicesFolder[ParentService]
-	Controller.Name = Name
+	Controller.Parent = ServicesFolder[argstable["ParentService"]]
+	Controller.Name = argstable["Name"]
 	table.insert(Controllers, Controller)
 	Controller.OnServerInvoke:Connect(function(args)
-		pcall(Invoke(args))
+		pcall(argstable["Invoke"](args))
 	end)
 	return Controller
 end
