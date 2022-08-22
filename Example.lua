@@ -8,16 +8,20 @@ Sew.CreateVar({
 	["Value"] = true
 })
 
-local SwordService = Sew.CreateService({["Name"] = "SwordService"})
+Sew.CreateService({["Name"] = "SwordService"})
+local SwordService = Sew.GetService("SwordService")
 
 Sew.CreateController({
-	["Name"] = "SwordController"
-	["ParentService"] = SwordService
+	["Name"] = "SwordController",
+	["ParentService"] = SwordService,
 	["Invoke"] = function(args)
-		print(getVars.Bool.Value)
+		print(args)
+		getVars.Bool.Value = args
 	end)
 })
 
+local args = false
 
+Sew.GetController("SwordControlle"):InvokeServer(args)
 
 print(getVars.Bool.Value)
