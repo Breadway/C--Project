@@ -27,6 +27,11 @@ local Brickvars = {}
 local Boolvars = {}
 local Allvars = {}
 
+function Sew.GetVar(Var)
+	local var = AllVars[Var]
+	return var
+end
+
 function Sew.GetAllControllers()
 	return Controllers
 end
@@ -100,31 +105,31 @@ function Sew.CreateVar(argstable)
 		return
 	end
 
-	local Int = Instance.new(argstable["Type"].. "Value")
-	Int.Name = argstable["Name"]
-	Int.Value = argstable["Value"]
+	local Var = Instance.new(argstable["Type"].. "Value")
+	Var.Name = argstable["Name"]
+	Var.Value = argstable["Value"]
 	print("Successfully Made ".. argstable["Name"] .. " Value Of Type: " .. argstable["Type"])
-	table.insert(Allvars, Int)
-	if Int.ClassName == "BoolValue" then
-		table.insert(Boolvars, Int)
-	elseif Int.ClassName == "IntValue" then
-		table.insert(Intvars, Int)
-	elseif Int.ClassName == "BrickColorValue" then
-		table.insert(Brickvars, Int)
-	elseif Int.ClassName == "CFrameValue" then
-		table.insert(CFramevars, Int)
-	elseif Int.ClassName == "Color3Value" then
-		table.insert(Color3vars, Int)
-	elseif Int.ClassName == "ObjectValue" then
-		table.insert(Objectvars, Int)
-	elseif Int.ClassName == "NumberValue" then
-		table.insert(Numbervars, Int)
-	elseif Int.ClassName == "RayValue" then
-		table.insert(Numbervars, Int)
-	elseif Int.ClassName == "Vector3Value" then
-		table.insert(Vector3vars, Int)
-	elseif Int.ClassName == "StringValue" then
-		table.insert(Stringvars, Int)
+	table.insert(Allvars, Var)
+	if Var.ClassName == "BoolValue" then
+		table.insert(Boolvars, Var)
+	elseif Var.ClassName == "IntValue" then
+		table.insert(Intvars, Var)
+	elseif Var.ClassName == "BrickColorValue" then
+		table.insert(Brickvars, Var)
+	elseif Var.ClassName == "CFrameValue" then
+		table.insert(CFramevars, Var)
+	elseif Var.ClassName == "Color3Value" then
+		table.insert(Color3vars, Var)
+	elseif Var.ClassName == "ObjectVar" then
+		table.insert(Objectvars, Var)
+	elseif Var.ClassName == "NumberValue" then
+		table.insert(Numbervars, Var)
+	elseif Var.ClassName == "RayValue" then
+		table.insert(Numbervars, Var)
+	elseif Var.ClassName == "Vector3Value" then
+		table.insert(Vector3vars, Var)
+	elseif Var.ClassName == "StringValue" then
+		table.insert(Stringvars, Var)
 	end
 	return Int
 end
