@@ -27,6 +27,14 @@ local Brickvars = {}
 local Boolvars = {}
 local Allvars = {}
 
+function Sew.GetAllControllers()
+	return Controllers
+end
+
+function Sew.GetAllServices()
+	return Services
+end
+
 function Sew.GetVars()
 	return Allvars
 end
