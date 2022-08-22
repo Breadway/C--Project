@@ -68,7 +68,7 @@ function Sew.Stringvars()
 	return Stringvars
 end
 
-function Sew.new(argstable)
+function Sew.CreateVar(argstable)
 	local valid = table.find(validTypes, argstable["Type"])
 	if script.DebugMode.Value then
 		print(argstable)
