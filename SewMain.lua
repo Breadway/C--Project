@@ -121,9 +121,17 @@ end
 
 function Sew.CreateService(argstable)
 	local ServicesFolder = game.ReplicatedStorage.Sew.Services
-	local Service = Instance.new("RemoteFunction")
+	local Service = Instance.new("Folder")
 	Service.Parent = ServicesFolder
+	Service.Name = argstable["Name"]
 	table.insert(Services, Service)
 end
+
+function Sew.GetService(Name)
+	local service = Services[Name]
+	return service
+end
+
+function 
 
 return Sew
