@@ -126,6 +126,7 @@ function Sew.CreateService(argstable)
 	Service.Parent = ServicesFolder
 	Service.Name = argstable["Name"]
 	table.insert(Services, Service)
+	return Service
 end
 
 function Sew.GetService(Name)
