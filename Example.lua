@@ -22,6 +22,6 @@ Sew.CreateController({
 
 local args = false
 
-Sew.GetController("SwordControlle"):InvokeServer(args)
+Sew.GetController("SwordController", "SwordService"):InvokeServer(args)
 
 print(getVars.Bool.Value)
