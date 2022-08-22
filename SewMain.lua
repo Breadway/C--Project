@@ -139,7 +139,10 @@ function Sew.CreateController(argstable)
 	Controller.Name = argstable["Name"]
 	table.insert(Controllers, Controller)
 	Controller.OnServerInvoke:Connect(function(args)
-		pcall(argstable["Invoke"](args))
+		pcall(function(args)
+			pcall(argstable["Invoke"])
+			return args
+		end)
 	end)
 	return Controller
 end
