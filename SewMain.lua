@@ -65,6 +65,7 @@ function Sew.CreateController(argstable)
 	local Controller = Instance.new("BindableEvent")
 	local Event = nil or argstable["Event"]
 	Controller.Name = argstable["Name"]
+	Sew.Services[argstable["ParentService"]][argstable["Name"]] = Controller
 	Sew.Controllers[argstable["Name"]] = Controller
 	Controller.Event  = function(args)
 		pcall(function(args)
