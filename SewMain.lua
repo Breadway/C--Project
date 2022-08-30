@@ -15,14 +15,10 @@ local validTypes = {
 Sew.Services = Instance.new("Folder")
 Sew.Vars = Instance.new("Folder")
 
-function Sew:GetController(Name)
-	return Controllers[Name]
-end
-
 function Sew:Createvar(argstable)
 	pcall(function(argstable)
 		local valid = table.find(validTypes, argstable["Type"])
-		if script.Parent.DebugMode.Value then
+		if script.DebugMode.Value then
 			print(argstable)
 		end
 
@@ -34,7 +30,6 @@ function Sew:Createvar(argstable)
 		local Var = Instance.new(argstable["Type"].. "Value")
 		Var.Name = argstable["Name"]
 		Var.Value = argstable["Value"]
-		print("Successfully Made ".. argstable["Name"] .. " Value Of Type: " .. argstable["Type"])
 		Var.Parent = Sew.Vars
 		return Var
 	end)
