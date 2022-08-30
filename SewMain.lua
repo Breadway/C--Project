@@ -12,75 +12,12 @@ local validTypes = {
 	"String"
 }
 
-local Services = {}
-local Controllers = {}
-local Stringvars = {}
-local Intvars = {}
-local Vector3vars = {}
-local Rayvars = {}
-local Numbervars = {}
-local Objectvars = {}
-local Color3vars = {}
-local CFramevars = {}
-local Brickvars = {}
-local Boolvars = {}
-local Allvars = {}
-
-function Sew.GetVar(Var)
-	local var = Allvars[Var]
-	return var
-end
+Sew.Services = {}
+Sew.Controllers = {}
+Sew.Vars = {}
 
 function Sew:GetController(Name)
 	return Controllers[Name]
-end
-
-function Sew.GetAllServices()
-	return Services
-end
-
-function Sew.GetVars()
-	return Allvars
-end
-
-function Sew.Intvars()
-	return Intvars
-end
-
-function Sew.Boolvars()
-	return Boolvars
-end
-
-function Sew.Brickvars()
-	return Brickvars
-end
-
-function Sew.CFramevars()
-	return CFramevars
-end
-
-function Sew.Colorvars()
-	return Color3vars
-end
-
-function Sew.Objectvars()
-	return Objectvars
-end
-
-function Sew.Numbervars()
-	return Numbervars
-end
-
-function Sew.Rayvars()
-	return Rayvars
-end
-
-function Sew.Vector3vars()
-	return Vector3vars
-end
-
-function Sew.Stringvars()
-	return Stringvars
 end
 
 function Sew:Createvar(argstable)
@@ -108,51 +45,30 @@ function Sew:Createvar(argstable)
 	Var.Name = argstable["Name"]
 	Var.Value = argstable["Value"]
 	print("Successfully Made ".. argstable["Name"] .. " Value Of Type: " .. argstable["Type"])
-	table.insert(Allvars, Var)
-	if Var.ClassName == "BoolValue" then
-		table.insert(Boolvars, Var)
-	elseif Var.ClassName == "IntValue" then
-		table.insert(Intvars, Var)
-	elseif Var.ClassName == "BrickColorValue" then
-		table.insert(Brickvars, Var)
-	elseif Var.ClassName == "CFrameValue" then
-		table.insert(CFramevars, Var)
-	elseif Var.ClassName == "Color3Value" then
-		table.insert(Color3vars, Var)
-	elseif Var.ClassName == "ObjectVar" then
-		table.insert(Objectvars, Var)
-	elseif Var.ClassName == "NumberValue" then
-		table.insert(Numbervars, Var)
-	elseif Var.ClassName == "RayValue" then
-		table.insert(Numbervars, Var)
-	elseif Var.ClassName == "Vector3Value" then
-		table.insert(Vector3vars, Var)
-	elseif Var.ClassName == "StringValue" then
-		table.insert(Stringvars, Var)
-	end
+	Sew.Vars[argstable["Name"]] = Var
 	return Var
 end
 
 function Sew.CreateService(argstable)
 	local Service = Instance.new("Folder")
 	Service.Name = argstable["Name"]
-	table.insert(Services, Service)
+	Sew.Services[argstable["Name"]] = Service
 	return Service
 end
 
 function Sew.GetService(Name)
-	local service = Services[Name]
+	local service = Sew.Services[Name]
 	return service
 end
 
 function Sew.CreateController(argstable)
-	local Controller = Instance.new("RemoteFunction")
-	local Invoke = nil or argstable["Invoke"]
+	local Controller = Instance.new("BindableEvent")
+	local Event = nil or argstable["Event"]
 	Controller.Name = argstable["Name"]
-	table.insert(Controllers, Controller)
-	Controller.OnClientInvoke  = function(args)
+	Sew.Controllers[argstable["Name"]] = Controller
+	Controller.Event  = function(args)
 		pcall(function(args)
-			pcall(Invoke, args)
+			Event(args)
 		end)
 	end
 	return Controller
