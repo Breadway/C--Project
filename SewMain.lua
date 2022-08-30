@@ -48,9 +48,9 @@ function Sew:Createvar(argstable)
 	return Var
 end
 
-function Sew.CreateService(argstable)
+function Sew.CreateService(Name)
 	local Service = Instance.new("Folder")
-	Service.Name = argstable["Name"]
+	Service.Name = Name
 	Service.Parent = Sew.Services
 	return Service
 end
