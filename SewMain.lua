@@ -20,32 +20,24 @@ function Sew:GetController(Name)
 end
 
 function Sew:Createvar(argstable)
-	local valid = table.find(validTypes, argstable["Type"])
-	if script.Parent.DebugMode.Value then
-		print(argstable)
-	end
-	--[[if argstable["Type"] ~= "Bool" then valid = false elseif argstable["Type"] == "Bool" then valid = true end
-	if argstable["Type"] ~= "BrickColor" then valid = false elseif argstable["Type"] == "BrickColor" then valid = true end
-	if argstable["Type"] ~= "CFrame" then valid = false elseif argstable["Type"] == "CFrame" then valid = true end
-	if argstable["Type"] ~= "Color3" then valid = false elseif argstable["Type"] == "Color3" then valid = true end
-	if argstable["Type"] ~= "Object" then valid = false elseif argstable["Type"] == "Object" then valid = true end
-	if argstable["Type"] ~= "Number" then valid = false elseif argstable["Type"] == "Number" then valid = true end
-	if argstable["Type"] ~= "Ray" then valid = false elseif argstable["Type"] == "Ray" then valid = true end
-	if argstable["Type"] ~= "Vector3" then valid = false elseif argstable["Type"] == "Vector3" then valid = true end
-	if argstable["Type"] ~= "Int" then valid = false elseif argstable["Type"] == "Int" then valid = true end
-	if argstable["Type"] ~= "String" then valid = false elseif argstable["Type"] == "String" then valid = true end
-	]]--
-	if not valid then
-		warn(argstable["Type"] .. " Is Not A Valid Value Type")
-		return
-	end
+	pcall(function(argstable)
+		local valid = table.find(validTypes, argstable["Type"])
+		if script.Parent.DebugMode.Value then
+			print(argstable)
+		end
 
-	local Var = Instance.new(argstable["Type"].. "Value")
-	Var.Name = argstable["Name"]
-	Var.Value = argstable["Value"]
-	print("Successfully Made ".. argstable["Name"] .. " Value Of Type: " .. argstable["Type"])
-	Var.Parent = Sew.Vars
-	return Var
+		if not valid then
+			warn(argstable["Type"] .. " Is Not A Valid Value Type")
+			return
+		end
+
+		local Var = Instance.new(argstable["Type"].. "Value")
+		Var.Name = argstable["Name"]
+		Var.Value = argstable["Value"]
+		print("Successfully Made ".. argstable["Name"] .. " Value Of Type: " .. argstable["Type"])
+		Var.Parent = Sew.Vars
+		return Var
+	end)
 end
 
 function Sew.CreateService(Name)
@@ -53,11 +45,6 @@ function Sew.CreateService(Name)
 	Service.Name = Name
 	Service.Parent = Sew.Services
 	return Service
-end
-
-function Sew.GetService(Name)
-	local service = Sew.Services[Name]
-	return service
 end
 
 function Sew.CreateController(argstable)
