@@ -12,9 +12,8 @@ local validTypes = {
 	"String"
 }
 
-Sew.Services = {}
-Sew.Controllers = {}
-Sew.Vars = {}
+Sew.Services = Instance.new("Folder")
+Sew.Vars = Instance.new("Folder")
 
 function Sew:GetController(Name)
 	return Controllers[Name]
@@ -45,14 +44,14 @@ function Sew:Createvar(argstable)
 	Var.Name = argstable["Name"]
 	Var.Value = argstable["Value"]
 	print("Successfully Made ".. argstable["Name"] .. " Value Of Type: " .. argstable["Type"])
-	Sew.Vars[argstable["Name"]] = Var
+	Var.Parent = Sew.Vars
 	return Var
 end
 
 function Sew.CreateService(argstable)
 	local Service = Instance.new("Folder")
 	Service.Name = argstable["Name"]
-	Sew.Services[argstable["Name"]] = Service
+	Service.Parent = Sew.Services
 	return Service
 end
 
@@ -65,8 +64,7 @@ function Sew.CreateController(argstable)
 	local Controller = Instance.new("BindableEvent")
 	local Event = nil or argstable["Event"]
 	Controller.Name = argstable["Name"]
-	Sew.Services[argstable["ParentService"]][argstable["Name"]] = Controller
-	Sew.Controllers[argstable["Name"]] = Controller
+	Controller.Parent = Sew.Services[argstable["ParentService"]]
 	Controller.Event  = function(args)
 		pcall(function(args)
 			Event(args)
