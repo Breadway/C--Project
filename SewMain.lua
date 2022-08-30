@@ -52,11 +52,11 @@ function Sew.CreateController(argstable)
 	local Event = nil or argstable["Event"]
 	Controller.Name = argstable["Name"]
 	Controller.Parent = Sew.Services[argstable["ParentService"]]
-	Controller.Event  = function(args)
+	Controller.Event:Connect(function(args)
 		pcall(function(args)
 			Event(args)
 		end)
-	end
+	end)
 	return Controller
 end
 
