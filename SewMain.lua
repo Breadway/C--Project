@@ -12,8 +12,8 @@ local validTypes = {
 	"String"
 }
 
-Sew.Services = Instance.new("Folder")
-Sew.Vars = Instance.new("Folder")
+Sew.Services = Instance.new("Folder", game.ServerStorage)
+Sew.Vars = Instance.new("Folder", game.ServerStorage)
 
 function Sew:Createvar(argstable)
 	pcall(function(argstable)
